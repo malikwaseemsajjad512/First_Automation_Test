@@ -1,0 +1,27 @@
+describe("Automation testing for OrangeHRM", function (){
+    it("Positve Test case for login", function(){
+     cy.fixture("Credentials").then((Credential) =>{
+        cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+        cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(Credential.username)
+        cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(Credential.Password)
+        cy.get('.oxd-button').click()
+        cy.get('.oxd-input').type("Admin")
+        cy.get(':nth-child(1) > .oxd-main-menu-item').click()
+        cy.get('.orangehrm-header-container > .oxd-button').click()
+        cy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+        cy.contains('ESS').click()
+        cy.get('.oxd-autocomplete-text-input > input')
+              .type('Fname Mname Lname')
+        cy.wait(10000)
+        cy.get('.oxd-autocomplete-dropdown > *')
+        .contains("FName Mname LName").click()
+        cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click()
+        cy.contains('Enabled').click()
+        cy.get(':nth-child(4) > .oxd-input-group > :nth-child(2) > .oxd-input').type("NewAdmin123")
+        cy.get('.user-password-cell > .oxd-input-group > :nth-child(2) > .oxd-input').type("admin123")
+        cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type("admin123")
+        cy.get('.oxd-button--secondary').click()
+
+      })
+    })
+  })
